@@ -10,12 +10,12 @@ const app = express();
 const con = require("./db");
 
 // importing routes
-const userRoute = require('./routes/userRoute');
+const authRoute = require('./routes/authRoute');
 
 app.use(express.json({ limit: '10kb' }));
 app.use(express.urlencoded({ extended: true, limit: '10kb' }));
 
-app.use('/accounts', userRoute);
+app.use('/accounts', authRoute);
 
 
 const port = process.env.PORT;
