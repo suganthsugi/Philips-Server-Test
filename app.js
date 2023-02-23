@@ -1,5 +1,5 @@
 const express = require("express");
-const bodyParser = require('body-parser');
+// const bodyParser = require('body-parser');
 
 // to access the env file
 require('dotenv').config()
@@ -15,7 +15,7 @@ const userRoute = require('./routes/userRoute');
 app.use(express.json({ limit: '10kb' }));
 app.use(express.urlencoded({ extended: true, limit: '10kb' }));
 
-app.use('/accounts', userRoute)
+app.use('/accounts', userRoute);
 
 
 const port = process.env.PORT;
