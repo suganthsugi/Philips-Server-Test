@@ -55,6 +55,7 @@ exports.login = (async (req, res) => {
                     msg:"all fields are required",
                 }
             });
+            return;
         }
 
         // finding the user with phno or email
@@ -73,6 +74,7 @@ exports.login = (async (req, res) => {
                     msg:"user not exsists or user is inactive",
                 }
             });
+            return;
         }
 
         const checkPassword = bcrypt.compare(password, currUser.password);
@@ -83,6 +85,7 @@ exports.login = (async (req, res) => {
                     msg:"password dosent match",
                 }
             });
+            return;
         }
 
         const jwt_token = jwt.sign({ user_id:currUser._id }, process.env.JWT_SECRET, { expiresIn: process.env.JWT_EXPIRES_IN });
@@ -95,6 +98,7 @@ exports.login = (async (req, res) => {
                 user:currUser
             }
         });
+        return;
 
     } catch (err) {
         res.status(400).json({
@@ -106,3 +110,36 @@ exports.login = (async (req, res) => {
         })
     }
 });
+
+exports.testUser = (req, res) => {
+    // res.json({
+    //     status:"success",
+    //     data:{
+    //         user:req.user
+    //     }
+    // })
+    if(req.user.isAdmin){
+        res.json({
+            status:"success",
+            data:{
+                msg:"you are a admin so you has access"
+            }
+        })
+    }
+    else if(req.user.isStaff){
+        res.json({
+            status:"success",
+            data:{
+                msg:"you are a admin so you has access"
+            }
+        })
+    }
+    else{
+        res.json({
+            error:"error",
+            data:{
+                msg:"you are not authorized"
+            }
+        })
+    }
+}
