@@ -111,35 +111,35 @@ exports.login = (async (req, res) => {
     }
 });
 
-exports.testUser = (req, res) => {
-    // res.json({
-    //     status:"success",
-    //     data:{
-    //         user:req.user
-    //     }
-    // })
-    if(req.user.isAdmin){
-        res.json({
-            status:"success",
-            data:{
-                msg:"you are a admin so you has access"
-            }
-        })
-    }
-    else if(req.user.isStaff){
-        res.json({
-            status:"success",
-            data:{
-                msg:"you are a admin so you has access"
-            }
-        })
-    }
-    else{
-        res.json({
-            error:"error",
-            data:{
-                msg:"you are not authorized"
-            }
-        })
-    }
-}
+// exports.testUser = (req, res) => {
+//     // res.json({
+//     //     status:"success",
+//     //     data:{
+//     //         user:req.user
+//     //     }
+//     // })
+//     if(req.user.isAdmin){
+//         res.json({
+//             status:"success",
+//             data:{
+//                 msg:"you are a admin so you has access"
+//             }
+//         })
+//     }
+//     else if(req.user.isStaff){
+//         res.json({
+//             status:"success",
+//             data:{
+//                 msg:"you are a admin so you has access"
+//             }
+//         })
+//     }
+//     else{
+//         res.json({
+//             error:"error",
+//             data:{
+//                 msg:"you are not authorized"
+//             }
+//         })
+//     }
+// }

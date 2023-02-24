@@ -4,13 +4,12 @@ const express = require('express');
 const router = express.Router();
 
 // importing middlewares
-const authToken = require('../middlewares/authToken');
+// const authToken = require('../middlewares/authToken');
 
 // importing controllers
 const authController = require('../controllers/authController');
 
-router.post('/register', authController.register);
-router.post('/login', authController.login);
-router.get('/testUser', authToken.authToken, authController.testUser);
+router.route('/register').post(authController.register);
+router.route('/login').post(authController.login);
 
 module.exports = router;
