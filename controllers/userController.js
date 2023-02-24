@@ -5,8 +5,7 @@ const User = require('../models/userSchema');
 
 exports.getUserDetail = async (req, res) => {
     try {
-        const user = await User.findById(req.user.user_id);
-        if(user==null) {
+        if(req.user == undefined || req.user.user_id == undefined) {
             res.status(403).json({
                 status:"error",
                 data:{
@@ -15,6 +14,7 @@ exports.getUserDetail = async (req, res) => {
             });
             return;
         }
+        const user = await User.findById(req.user.user_id);
         res.status(200).json({
             status:"success",
             data:{

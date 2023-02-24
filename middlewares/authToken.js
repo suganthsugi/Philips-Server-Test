@@ -19,6 +19,8 @@ exports.authToken = (req, res, next) => {
                     msg:"jwt_token missing"
                 }
             });
+            next();
+            return;
         }
         else{
             jwt.verify(token, process.env.JWT_SECRET, async (err, user) => {
@@ -29,9 +31,19 @@ exports.authToken = (req, res, next) => {
                             msg:"the token is no longer valid or you dont have an access"
                         }
                     });
+                    return;
                 }
                 
                 // settingup all the user access for the current loggedin user for easy access
+                if(user==undefined || user.user_id==undefined){
+                    res.status(403).json({
+                        status:"error",
+                        data:{
+                            msg:"the token is no longer valid or you dont have an access"
+                        }
+                    });
+                    return;
+                }
                 const currUser = await User.findById(user.user_id);
                 user.isAdmin = currUser.isAdmin;
                 user.isStaff = currUser.isStaff;
